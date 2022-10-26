@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+# Dá acesso a busca por variáveis de ambiente no sistema operacional.
+import os
+# percorre e carrega a variável de ambiente
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ya&o%ynd7y@!y6j^c0ph)l_*%!z$aez42+&auddb*af$5401mv'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# O programa irá procurar a variável e caso não encontre usará o False pois o False depois da virgula corresponde
+# a um valor default.
+DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
